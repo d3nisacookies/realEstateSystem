@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import "../../../Styles/adminCreateUserAccount.css";
+import "../../../Styles/CreateUserProfilePage.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthContext";
 

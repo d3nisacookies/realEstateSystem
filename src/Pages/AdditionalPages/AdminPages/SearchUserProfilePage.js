@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import "../../../Styles/adminSearchUserAccount.css";
+import "../../../Styles/adminSearchUserProfilePage.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthContext";
 

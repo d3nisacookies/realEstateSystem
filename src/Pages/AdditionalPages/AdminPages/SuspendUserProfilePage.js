@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../../../Styles/adminSuspendUserProfilePage.css"
 
 //import "../../../Styles/adminSuspendUserAccount.css";
 import { useContext } from "react";
