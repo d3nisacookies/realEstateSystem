@@ -1,7 +1,5 @@
 import React from "react";
-import house1 from "../../Assets/house1.png";
-import house2 from "../../Assets/house2.png";
-import house3 from "../../Assets/house3.png";
+
 import Rental from "./Rental";
 
 const Rentals = ({ properties }) => {
@@ -15,8 +13,12 @@ const Rentals = ({ properties }) => {
             title={rental.title}
             image={rental.listingPhotos[0]}
             price={rental.price}
-            views={12}
-            tag={rental.tags[0]}
+            views={rental.viewCount || 0}
+            tag={
+              rental.tags.includes("Sold Property")
+                ? "Sold Property"
+                : "Available Property"
+            }
           />
         ))}
       </div>

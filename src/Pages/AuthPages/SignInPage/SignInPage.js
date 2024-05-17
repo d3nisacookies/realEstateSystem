@@ -28,15 +28,22 @@ function SignInPage() {
           values.password
         );
 
-        toast.promise(Promise.resolve(response), {
-          loading: <b>Signing In...</b>,
-          success: <b>SignIn Successfully...!</b>,
-          error: <b>Could not SignIn. Invalid credentials</b>,
-        });
         console.log("Response from entity: ", response);
         const userType = response.userType;
+        const isSuspended = response.isSuspended;
 
-        handleUserTypeNavigation(userType);
+        if (!isSuspended) {
+          toast.promise(Promise.resolve(response), {
+            loading: <b>Signing In...</b>,
+            success: <b>SignIn Successfully...!</b>,
+            error: <b>Could not SignIn. Invalid credentials</b>,
+          });
+          handleUserTypeNavigation(userType);
+        } else {
+          toast.error(
+            "Your account has been suspended. Please contact the admin."
+          );
+        }
       } catch (error) {
         console.error("Error during SignIn:", error);
         toast.error("Could not Sign In. Please try again.");

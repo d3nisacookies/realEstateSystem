@@ -1,7 +1,7 @@
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import SignUpPage from "./Pages/AuthPages/SignUpPage/SignUpPage";
 import SignInPage from "./Pages/AuthPages/SignInPage/SignInPage";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./Context/AuthContext";
 import BuyerHomePage from "./Pages/HomePages/BuyerHomePage";
@@ -33,13 +33,18 @@ import CreateUserProfilePage from "./Pages/AdditionalPages/AdminPages/CreateUser
 import SearchUserProfilePage from "./Pages/AdditionalPages/AdminPages/SearchUserProfilePage";
 import SuspendUserProfilePage from "./Pages/AdditionalPages/AdminPages/SuspendUserProfilePage";
 import ViewUserProfilePage from "./Pages/AdditionalPages/AdminPages/ViewUserProfilePage";
+import LoadingAnimation from "./Components/LoadingAnimation";
+import AdminUpdateAccountPage from "./Pages/AdditionalPages/AdminPages/AdminUpdateAccountPage";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    console.log("Current User: ", currentUser);
-  }, [currentUser]);
+    setTimeout(() => setLoading(false), 3500);
+  }, []);
+  if (loading) {
+    return <LoadingAnimation />;
+  }
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
@@ -243,6 +248,14 @@ const App = () => {
           }
         />
         <Route
+          path="/adminUpdateAccount/:Id"
+          element={
+            <ProtectedRoute>
+              <AdminUpdateAccountPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/soldProperty/:Id"
           element={
             <ProtectedRoute>
@@ -251,13 +264,14 @@ const App = () => {
           }
         />
         <Route
-          path="/updateProperty/:Id"
+          path="/updatePropertyDetail/:Id"
           element={
             <ProtectedRoute>
               <AgentListedPropertiesDetails />
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/updateListingPage/:Id"
           element={
